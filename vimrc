@@ -3,7 +3,7 @@ source ~/.vim/global.vim
 source ~/.vim/plugins.vim
 source ~/.vim/macros.vim
 if has('gui_running')
-    source ~/.vim/gvimrc
+  source ~/.vim/gvimrc
 end
 
 " vimrc is loaded BEFORE the plugins
@@ -79,3 +79,8 @@ set visualbell "No sounds
 filetype on
 filetype plugin on
 filetype indent on
+
+map <SPACE> <SPACE>:noh<CR>
+
+" убираем вертикальную толстую линию https://github.com/astrails/dotvim/issues/14
+let g:indent_guides_enable_on_vim_startup = 0
