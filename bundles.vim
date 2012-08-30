@@ -42,6 +42,7 @@ Bundle 'apidock.vim'
 " color themes
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'tomasr/molokai'
 
 " syntax support
 Bundle 'vim-ruby/vim-ruby'
