@@ -15,6 +15,7 @@ source ~/.vim/before.vim
 
 " set runtimepath=~/.vim,$VIMRUNTIME
 
+" make vim settings nocompatible with vi
 set nocompatible
 
 " color
@@ -43,10 +44,11 @@ set wrap " перенос длинных строк
 set lbr " переносить целые слова
 set mousehide " скрывать мышь в режиме ввода текста"
 
-" Powerline
+" Powerline (makes neat status bar)
 set laststatus=2
 let g:Powerline_symbols = 'fancy'
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
+":set guifont=Terminus\ 12
 
 " Overriding dividers
 " let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]]
@@ -84,3 +86,22 @@ map <SPACE> <SPACE>:noh<CR>
 
 " убираем вертикальную толстую линию https://github.com/astrails/dotvim/issues/14
 let g:indent_guides_enable_on_vim_startup = 0
+
+" trying to install vim-snipmate plugin (full)
+"Install dependencies:
+"Bundle "MarcWeber/vim-addon-mw-utils"
+"Bundle "tomtom/tlib_vim"
+"Bundle "honza/snipmate-snippets"
+
+"Install:
+"Bundle "garbas/vim-snipmate"
+
+"And :BundleInstall
+
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+"let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
