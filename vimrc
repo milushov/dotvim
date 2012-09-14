@@ -175,3 +175,25 @@ endfunction
 
 autocmd VimLeave * call SaveSess()
 autocmd VimEnter * call RestoreSess()
+
+" Mappings for working with splits
+
+" mapings from very very lazy man from there: http://vim.wikia.com/wiki/VimTip427 with my modifications
+
+" Maps Alt-[h,j,k,l] to resizing a window split
+map <silent> <A-h> :exe "vertical resize " . (winwidth(0) - 3)<CR>
+map <silent> <A-j> :exe "resize " . (winheight(0) - 3)<CR>
+map <silent> <A-k> :exe "resize " . (winheight(0) + 3)<CR>
+map <silent> <A-l> :exe "vertical resize " . (winwidth(0) + 3)<CR>
+
+" Maps Alt-[s.v] to horizontal and vertical split respectively
+map <silent> <A-s> :split<CR>
+map <silent> <A-v> :vsplit<CR>
+
+" Maps Alt-[n,p] for moving next and previous window respectively
+map <silent> <A-n> <C-w><C-w>
+map <silent> <A-p> <C-w><S-w>
+
+" tab navigation
+nnoremap <S-h> gT
+nnoremap <S-l> gt
