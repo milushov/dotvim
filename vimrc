@@ -54,7 +54,7 @@ set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 ":set guifont=Terminus\ 12
 
 " Overriding dividers
-" let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]]
+let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]]
 
 
 " Игнорировать регистр букв при поиске
@@ -173,8 +173,10 @@ endif
 syntax on
 endfunction
 
-autocmd VimLeave * call SaveSess()
-autocmd VimEnter * call RestoreSess()
+if has("gui_running")
+  autocmd VimLeave * call SaveSess()
+  autocmd VimEnter * call RestoreSess()
+endif
 
 " Mappings for working with splits
 
@@ -197,3 +199,7 @@ map <silent> <A-p> <C-w><S-w>
 " tab navigation
 nnoremap <S-h> gT
 nnoremap <S-l> gt
+
+" half-page smooth-scrolling
+:map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+:map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
