@@ -58,6 +58,7 @@ Bundle 'vim-scripts/jade.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'VimClojure'
 Bundle 'bbommarito/vim-slim'
+Bundle 'groenewege/vim-less'
 
 " Support and minor
 Bundle 'kana/vim-textobj-user'
@@ -70,3 +71,6 @@ Bundle 'mattn/webapi-vim'
 "Bundle 'ShowMarks'
 "Bundle 'tpope/vim-unimpaired'
 "Bundle 'reinh/vim-makegreen'
+
+"Bundle 'skammer/vim-css-color'
+"Bundle 'hail2u/vim-css3-syntax'

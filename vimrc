@@ -90,7 +90,7 @@ let g:indent_guides_enable_on_vim_startup = 0
 
 " Source the vimrc file after saving it
 if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
+autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
 "let mapleader = ","
@@ -139,43 +139,45 @@ map <F3> :source ~/vim_session <cr>
 set sessionoptions+=resize,winpos
 
 if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window.
-  set lines=42 columns=123
+" GUI is running or is about to start.
+" Maximize gvim window.
+set lines=42 columns=123
 else
-  " This is console Vim.
-  if exists("+lines")
-    set lines=42
-  endif
-  if exists("+columns")
-    set columns=123
-  endif
+" This is console Vim.
+if exists("+lines")
+  set lines=42
+endif
+if exists("+columns")
+  set columns=123
+endif
 endif
 
 
-:cd ~/Dropbox/r/playlists/                        "current working derectory
+if has("gui_running")
+:cd ~/Dropbox/r/forum/                        "current working derectory
+endif
 
 fu! SaveSess()
-  execute 'mksession! ' . getcwd() . '/.session.vim'
+execute 'mksession! ' . getcwd() . '/.session.vim'
 endfunction
 
 fu! RestoreSess()
 if filereadable(getcwd() . '/.session.vim')
-  execute 'so ' . getcwd() . '/.session.vim'
-  if bufexists(1)
-    for l in range(1, bufnr('$'))
-      if bufwinnr(l) == -1
-        exec 'sbuffer ' . l
-      endif
-    endfor
-  endif
+execute 'so ' . getcwd() . '/.session.vim'
+if bufexists(1)
+  for l in range(1, bufnr('$'))
+    if bufwinnr(l) == -1
+      exec 'sbuffer ' . l
+    endif
+  endfor
+endif
 endif
 syntax on
 endfunction
 
 if has("gui_running")
-  autocmd VimLeave * call SaveSess()
-  autocmd VimEnter * call RestoreSess()
+autocmd VimLeave * call SaveSess()
+autocmd VimEnter * call RestoreSess()
 endif
 
 " Mappings for working with splits
@@ -183,10 +185,12 @@ endif
 " mapings from very very lazy man from there: http://vim.wikia.com/wiki/VimTip427 with my modifications
 
 " Maps Alt-[h,j,k,l] to resizing a window split
-map <silent> <A-h> :exe "vertical resize " . (winwidth(0) - 3)<CR>
-map <silent> <A-j> :exe "resize " . (winheight(0) - 3)<CR>
-map <silent> <A-k> :exe "resize " . (winheight(0) + 3)<CR>
-map <silent> <A-l> :exe "vertical resize " . (winwidth(0) + 3)<CR>
+:let resize_w = 20
+:let resize_h = 5
+map <silent> <A-h> :exe "vertical resize " . (winwidth(0) - resize_w)<CR>
+map <silent> <A-j> :exe "resize " . (winheight(0) - resize_h)<CR>
+map <silent> <A-k> :exe "resize " . (winheight(0) + resize_h)<CR>
+map <silent> <A-l> :exe "vertical resize " . (winwidth(0) + resize_w)<CR>
 
 " Maps Alt-[s.v] to horizontal and vertical split respectively
 map <silent> <A-s> :split<CR>
@@ -197,6 +201,7 @@ map <silent> <A-n> <C-w><C-w>
 map <silent> <A-p> <C-w><S-w>
 
 " tab navigation
+nnoremap <C-T> :tabe<CR>
 nnoremap <S-h> gT
 nnoremap <S-l> gt
 
