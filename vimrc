@@ -132,9 +132,9 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 
 " Global session
 " Quick write session with F2
-map <F2> :mksession! ~/vim_session <cr>
+"map <F2> :mksession! ~/vim_session <cr>
 " And load session with F3
-map <F3> :source ~/vim_session <cr>
+"map <F3> :source ~/vim_session <cr>
 
 set sessionoptions+=resize,winpos
 
@@ -208,3 +208,17 @@ nnoremap <S-l> gt
 " half-page smooth-scrolling
 :map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 :map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+
+Bundle "myusuf3/numbers.vim"
+nnoremap <F3> :NumbersToggle<CR>
+
+Bundle "mattn/pastebin-vim"
+let g:pastebin_api_dev_key = '8433a2d6cfbfb3977ee3339fcd481903'
+let g:pastebin_private = '1'
+
+Bundle 'mikewest/vimroom'
+nnoremap <silent> <Leader>mz <Plug>VimroomToggle
+
+let g:NERDTreeWinPos = 'right'
+
+ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
