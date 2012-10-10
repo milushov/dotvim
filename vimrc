@@ -154,7 +154,7 @@ endif
 
 
 if has("gui_running")
-:cd ~/Dropbox/r/forum/                        "current working derectory
+  :cd ~/Dropbox/r/divers/                        "current working derectory
 endif
 
 fu! SaveSess()
@@ -202,8 +202,8 @@ map <silent> <A-p> <C-w><S-w>
 
 " tab navigation
 nnoremap <C-T> :tabe<CR>
-nnoremap <S-h> gT
-nnoremap <S-l> gt
+"nnoremap <S-h> gT
+"nnoremap <S-l> gt
 
 " half-page smooth-scrolling
 :map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
