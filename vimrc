@@ -2,12 +2,26 @@ source ~/.vim/bundles.vim
 source ~/.vim/global.vim
 source ~/.vim/plugins.vim
 source ~/.vim/macros.vim
+
 if has('gui_running')
   source ~/.vim/gvimrc
 end
 
 " vimrc is loaded BEFORE the plugins
 source ~/.vim/before.vim
+
+if has("gui_running")
+  :cd ~/Dropbox/r/miel                        "current working derectory
+endif
+
+Bundle "myusuf3/numbers.vim"
+Bundle "mattn/pastebin-vim"
+Bundle 'mikewest/vimroom'
+Bundle 'mattn/gist-vim'
+Bundle "pangloss/vim-javascript"
+Bundle "majutsushi/tagbar"
+Bundle "autre/Rainbow-Parenthsis-Bundle"
+Bundle "vim-scripts/loremipsum"
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
@@ -17,80 +31,56 @@ source ~/.vim/before.vim
 
 " next 60 lines is part of nicklassos's config
 
-" make vim settings nocompatible with vi
-set nocompatible
-
-
-" color
+set nocompatible " make vim settings nocompatible with vi
 let molokai_original = 1
 colorscheme molokai
-
 set t_Co=256
-
 set autoindent
 set smartindent
 set smarttab
-
-""" Размер табулации по умолчанию """
-
-set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-
-filetype on
-filetype plugin on
-filetype indent on
-set encoding=utf-8
-
-filetype on
-filetype plugin on
-
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set autoread
+set smartcase " Override the 'ignorecase' option if the search pattern contains upper case characters
+set incsearch
+set shiftround " drop unused spaces
 set wrap " перенос длинных строк
 set lbr " переносить целые слова
 set mousehide " скрывать мышь в режиме ввода текста"
-
-" Powerline (makes neat status bar)
+set encoding=utf-8
+set nu " Номерация строк
+set visualbell "No sounds
 set laststatus=2
-let g:Powerline_symbols = 'fancy'
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-":set guifont=Terminus\ 12
-
-" Overriding dividers
-let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]]
-
-
-" Игнорировать регистр букв при поиске
-set ignorecase
-
-" tab name
-set guitablabel=%t 
-
-" Отключаеd создание бэкапов
-set nobackup
-" Отключаем создание swap файлов
-set noswapfile
-
-" Работать с буфером обмена сиситемы
-set clipboard=unnamedplus
-
+set ignorecase " Игнорировать регистр букв при поиске
+set guitablabel=%t " tab name
+set nobackup " Отключаеd создание бэкапов
+set noswapfile " Отключаем создание swap файлов
+set clipboard=unnamedplus " Работать с буфером обмена сиситемы
 " Убрать тулбары
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=L  "remove right-hand scroll bar
 
-" Номерация строк
-set nu
-
-set visualbell "No sounds
-
+filetype on
+filetype plugin on
+filetype indent on
 filetype on
 filetype plugin on
 filetype indent on
 
+let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
+let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]] " Overriding dividers
+":set guifont=Terminus\ 12
+
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
-let g:indent_guides_enable_on_vim_startup = 0
+"let g:indent_guides_enable_on_vim_startup = 0
 
 " Source the vimrc file after saving it
 if has("autocmd")
-autocmd bufwritepost .vimrc source $MYVIMRC
+  autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
 "let mapleader = ","
@@ -139,47 +129,32 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 set sessionoptions+=resize,winpos
 
 if has("gui_running")
-" GUI is running or is about to start.
-" Maximize gvim window.
-set lines=42 columns=123
-else
-" This is console Vim.
-if exists("+lines")
-  set lines=42
-endif
-if exists("+columns")
-  set columns=123
-endif
-endif
-
-
-if has("gui_running")
-  :cd ~/Dropbox/r/divers/                        "current working derectory
+  set lines=52 columns=158 " Maximize gvim window.
 endif
 
 fu! SaveSess()
-execute 'mksession! ' . getcwd() . '/.session.vim'
+  execute 'mksession! ' . getcwd() . '/.session.vim'
 endfunction
 
 fu! RestoreSess()
-if filereadable(getcwd() . '/.session.vim')
-execute 'so ' . getcwd() . '/.session.vim'
-if bufexists(1)
-  for l in range(1, bufnr('$'))
-    if bufwinnr(l) == -1
-      exec 'sbuffer ' . l
+  if filereadable(getcwd() . '/.session.vim')
+    execute 'so ' . getcwd() . '/.session.vim'
+    if bufexists(1)
+      for l in range(1, bufnr('$'))
+        if bufwinnr(l) == -1
+          exec 'sbuffer ' . l
+        endif
+      endfor
     endif
-  endfor
-endif
-endif
-syntax on
+  endif
+
+  syntax on
 endfunction
 
-if has("gui_running")
-autocmd VimLeave * call SaveSess()
-autocmd VimEnter * call RestoreSess()
-endif
-
+if 0 == argc()
+  autocmd VimLeave * call SaveSess()
+  autocmd VimEnter * call RestoreSess()
+end
 " Mappings for working with splits
 
 " mapings from very very lazy man from there: http://vim.wikia.com/wiki/VimTip427 with my modifications
@@ -209,16 +184,36 @@ nnoremap <C-T> :tabe<CR>
 :map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 :map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 
-Bundle "myusuf3/numbers.vim"
 nnoremap <F3> :NumbersToggle<CR>
 
-Bundle "mattn/pastebin-vim"
 let g:pastebin_api_dev_key = '8433a2d6cfbfb3977ee3339fcd481903'
 let g:pastebin_private = '1'
 
-Bundle 'mikewest/vimroom'
 nnoremap <silent> <Leader>mz <Plug>VimroomToggle
 
 let g:NERDTreeWinPos = 'right'
 
 ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
+
+set wildignore+=*/tmp/*,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '.+\v\.(png|jpg|jpeg|gif)$',
+  \ }
+
+nmap <F8> :TagbarToggle<CR>
+
+" ruler http://stackoverflow.com/a/3765575/1171144
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+function! StartUp()
+  if 0 == argc()
+    NERDTree
+  end
+endfunction
+
+autocmd VimEnter * call StartUp()
