@@ -217,3 +217,13 @@ function! StartUp()
 endfunction
 
 autocmd VimEnter * call StartUp()
+
+" http://vim.wikia.com/wiki/Search_all_files_in_project_quickly
+map _u :call ID_search()<Bar>execute "/\\<" . g:word . "\\>"<CR>
+map _n :n<Bar>execute "/\\<" . g:word . "\\>"<CR>
+function ID_search()
+ let g:word = expand("<cword>")
+ let x = system("lid --key=none ". g:word)
+ let x = substitute(x, "\n", " ", "g")
+ execute "next " . x
+endfun
