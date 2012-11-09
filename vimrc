@@ -22,6 +22,7 @@ Bundle "pangloss/vim-javascript"
 Bundle "majutsushi/tagbar"
 Bundle "autre/Rainbow-Parenthsis-Bundle"
 Bundle "vim-scripts/loremipsum"
+Bundle "kien/tabman.vim"
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
