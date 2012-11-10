@@ -10,9 +10,7 @@ end
 " vimrc is loaded BEFORE the plugins
 source ~/.vim/before.vim
 
-if has("gui_running")
-  :cd ~/Dropbox/r/miel                        "current working derectory
-endif
+:let $cur_project = '~/Dropbox/r/miel'   "current working derectory
 
 Bundle "myusuf3/numbers.vim"
 Bundle "mattn/pastebin-vim"
@@ -152,9 +150,12 @@ fu! RestoreSess()
   syntax on
 endfunction
 
-if 0 == argc()
-  autocmd VimLeave * call SaveSess()
-  autocmd VimEnter * call RestoreSess()
+if has('gui_running')
+  if 0 == argc()
+    :cd $cur_project
+    autocmd VimLeave * call SaveSess()
+    autocmd VimEnter * call RestoreSess()
+  end
 end
 " Mappings for working with splits
 
@@ -217,7 +218,9 @@ function! StartUp()
   end
 endfunction
 
-autocmd VimEnter * call StartUp()
+if has('gui_running')
+  autocmd VimEnter * call StartUp()
+end
 
 " http://vim.wikia.com/wiki/Search_all_files_in_project_quickly
 map _u :call ID_search()<Bar>execute "/\\<" . g:word . "\\>"<CR>
