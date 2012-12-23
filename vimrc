@@ -1,3 +1,5 @@
+" TODO
+" http://vimcasts.org/episodes/tidying-whitespace/
 source ~/.vim/bundles.vim
 source ~/.vim/global.vim
 source ~/.vim/plugins.vim
@@ -21,6 +23,7 @@ Bundle "majutsushi/tagbar"
 Bundle "autre/Rainbow-Parenthsis-Bundle"
 Bundle "vim-scripts/loremipsum"
 Bundle "kien/tabman.vim"
+Bundle "Soares/rainbow.vim"
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
@@ -33,6 +36,8 @@ Bundle "kien/tabman.vim"
 set nocompatible " make vim settings nocompatible with vi
 let molokai_original = 1
 colorscheme molokai
+"colorscheme Tomorrow-Night-Eighties
+"colorscheme Tomorrow-Night
 set t_Co=256
 set autoindent
 set smartindent
@@ -45,12 +50,12 @@ set autoread
 set smartcase " Override the 'ignorecase' option if the search pattern contains upper case characters
 set incsearch
 set shiftround " drop unused spaces
-set wrap " перенос длинных строк
+"set wrap " перенос длинных строк
 set lbr " переносить целые слова
-set mousehide " скрывать мышь в режиме ввода текста"
+set mousehide " скрывать мышь в режиме ввода текста
 set encoding=utf-8
 set nu " Номерация строк
-set visualbell "No sounds
+"set visualbell "No sounds
 set laststatus=2
 set ignorecase " Игнорировать регистр букв при поиске
 set guitablabel=%t " tab name
@@ -231,3 +236,36 @@ function ID_search()
  let x = substitute(x, "\n", " ", "g")
  execute "next " . x
 endfun
+
+":nmap <C-a> ggVG"*yG<CR>
+":nmap <C-a> ggVG<CR>
+:nmap <C-a> :%y<CR>
+
+" http://vim.wikia.com/wiki/Open_PDF_files
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+set grepprg=ack
+hi level13c ctermfg=darkgreen guifg=darkgreen
+
+" from http://vimcasts.org/episodes/working-with-tabs/
+" for linux and windows users (using the control key)
+map <C-S-]> gt
+map <C-S-[> gT
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+map <C-0> :tablast<CR>
+
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
+nnoremap <leader>w <C-w>v<C-w>l
+
+"key mapping for tab navigation
+nmap <Tab> gt
+nmap <S-Tab> gT
