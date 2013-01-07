@@ -24,6 +24,8 @@ Bundle "autre/Rainbow-Parenthsis-Bundle"
 Bundle "vim-scripts/loremipsum"
 Bundle "kien/tabman.vim"
 Bundle "Soares/rainbow.vim"
+Bundle "gorkunov/smartgf.vim"
+Bundle "gorkunov/smartpairs.vim"
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
@@ -250,18 +252,18 @@ hi level13c ctermfg=darkgreen guifg=darkgreen
 
 " from http://vimcasts.org/episodes/working-with-tabs/
 " for linux and windows users (using the control key)
-map <C-S-]> gt
-map <C-S-[> gT
-map <C-1> 1gt
-map <C-2> 2gt
-map <C-3> 3gt
-map <C-4> 4gt
-map <C-5> 5gt
-map <C-6> 6gt
-map <C-7> 7gt
-map <C-8> 8gt
-map <C-9> 9gt
-map <C-0> :tablast<CR>
+nnoremap <C-S-]> gt
+nnoremap <C-S-[> gT
+nnoremap <C-1> 1gt
+nnoremap <C-2> 2gt
+nnoremap <C-3> 3gt
+nnoremap <C-4> 4gt
+nnoremap <C-5> 5gt
+nnoremap <C-6> 6gt
+nnoremap <C-7> 7gt
+nnoremap <C-8> 8gt
+nnoremap <C-9> 9gt
+nnoremap <C-0> :tablast<CR>
 
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 nnoremap <leader>w <C-w>v<C-w>l
@@ -269,3 +271,5 @@ nnoremap <leader>w <C-w>v<C-w>l
 "key mapping for tab navigation
 nmap <Tab> gt
 nmap <S-Tab> gT
+
+:au FocusLost,BufLeave * :update
