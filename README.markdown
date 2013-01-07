@@ -48,7 +48,7 @@ announcements of new versions, tips, etc.
   * [threesome.vim](#threesome.vim)
   * [vim-endwise](#vim-endwise)
   * [delimitMate](#delimitMate)
-  * [Gundo](#dgundo)
+  * [Gundo](#gundo)
 * [Ruby/Rails Support](#ruby)
   * [vim-rails](#vim-rails)
   * [vim-bundler](#vim-bundler)
@@ -80,6 +80,11 @@ From your homedirectory (on Linux/Mac OSX):
 * `cd .vim; make install`
 * create ~/.local.vim if you want to have some
   local/personal settings you don't want to commit into the repo
+
+> IMPORTANT: **always** add a `colorscheme` to your `~/.local-after.vim` file,
+> even if you use the defaults scheme add `colorscheme default`. Othewise you
+> will get a highlighting error `"E411: highlight group not found: Normal"`
+> during vim startup.
 
 Note: if you already have `~/.vim` `~/.vimrc` REMOVE THEM (you might want to backup them first :)
 
@@ -436,6 +441,14 @@ execute it with `@a`.
 
     * `,u` - toggle undo window
     * `:h gundo.txt` - more help
+
+
+*   <a name=switch>[Switch](https://github.com/AndrewRadev/switch.vim) ([top](#top))
+
+    A plugin to switch segments of text with predefined replacements
+
+    it will switch `"foo"` to `'foo'` to `:foo`. or `{:foo => bar}` to `{foo: bar}`,
+    etc. See `:h switch` for more.
 
 [top](#top)
 
