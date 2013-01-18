@@ -72,9 +72,6 @@ set guioptions-=L  "remove right-hand scroll bar
 filetype on
 filetype plugin on
 filetype indent on
-filetype on
-filetype plugin on
-filetype indent on
 
 let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
@@ -82,7 +79,7 @@ let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]] " Overrid
 ":set guifont=Terminus\ 12
 
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
-"let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_enable_on_vim_startup = 0
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -272,4 +269,4 @@ nnoremap <leader>w <C-w>v<C-w>l
 nmap <Tab> gt
 nmap <S-Tab> gT
 
-:au FocusLost,BufLeave * :update
+:au FocusLost,BufLeave * silent! :update
