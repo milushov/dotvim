@@ -1,6 +1,7 @@
 " TODO
 " http://vimcasts.org/episodes/tidying-whitespace/
-source ~/.vim/bundles.vim
+
+source ~/.vim/bundles.vim " all plugins
 source ~/.vim/global.vim
 source ~/.vim/plugins.vim
 source ~/.vim/macros.vim
@@ -20,12 +21,12 @@ Bundle 'mikewest/vimroom'
 Bundle 'mattn/gist-vim'
 Bundle "pangloss/vim-javascript"
 Bundle "majutsushi/tagbar"
-Bundle "autre/Rainbow-Parenthsis-Bundle"
 Bundle "vim-scripts/loremipsum"
 Bundle "kien/tabman.vim"
-Bundle "Soares/rainbow.vim"
 Bundle "gorkunov/smartgf.vim"
 Bundle "gorkunov/smartpairs.vim"
+Bundle "kien/rainbow_parentheses.vim"
+Bundle "skammer/vim-css-color"
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
@@ -86,7 +87,6 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-"let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " enabling indicate switching to insert mode
@@ -129,10 +129,20 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 " And load session with F3
 "map <F3> :source ~/vim_session <cr>
 
-set sessionoptions+=resize,winpos
+set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
 
 if has("gui_running")
-  set lines=52 columns=158 " Maximize gvim window.
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=56 columns=167
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=55
+  endif
+  if exists("+columns")
+    set columns=165
+  endif
 endif
 
 fu! SaveSess()
@@ -195,7 +205,7 @@ nnoremap <F3> :NumbersToggle<CR>
 let g:pastebin_api_dev_key = '8433a2d6cfbfb3977ee3339fcd481903'
 let g:pastebin_private = '1'
 
-nnoremap <silent> <Leader>mz <Plug>VimroomToggle
+nnoremap <leader>vr :VimroomToggle<cr>
 
 let g:NERDTreeWinPos = 'right'
 
@@ -211,7 +221,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " ruler http://stackoverflow.com/a/3765575/1171144
 if exists('+colorcolumn')
-  set colorcolumn=80
+  set colorcolumn=81
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
@@ -223,22 +233,29 @@ function! StartUp()
 endfunction
 
 if has('gui_running')
-  autocmd VimEnter * call StartUp()
+  " fuck that, because on start with saved session
+  " it add yet anoter NERDTree window
+
+  " autocmd VimEnter * call StartUp()
 end
 
 " http://vim.wikia.com/wiki/Search_all_files_in_project_quickly
 map _u :call ID_search()<Bar>execute "/\\<" . g:word . "\\>"<CR>
 map _n :n<Bar>execute "/\\<" . g:word . "\\>"<CR>
-function ID_search()
- let g:word = expand("<cword>")
- let x = system("lid --key=none ". g:word)
- let x = substitute(x, "\n", " ", "g")
- execute "next " . x
+
+function! ID_search()
+  let g:word = expand("<cword>")
+  let x = system("lid --key=none ". g:word)
+  let x = substitute(x, "\n", " ", "g")
+  execute "next " . x
 endfun
 
 ":nmap <C-a> ggVG"*yG<CR>
 ":nmap <C-a> ggVG<CR>
-:nmap <C-a> :%y<CR>
+":nmap <C-a> :%y<CR>
+
+" select all
+noremap <c-a> ggVG
 
 " http://vim.wikia.com/wiki/Open_PDF_files
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
@@ -270,3 +287,91 @@ nmap <Tab> gt
 nmap <S-Tab> gT
 
 :au FocusLost,BufLeave * silent! :update
+
+nnoremap ; :
+vnoremap ; :
+
+inoremap kj <Esc>
+
+" I can type :help on my own, thanks.
+noremap <F1> <Esc>
+
+" ****************** SCROLLING *********************  
+set scrolloff=8         " Number of lines from vertical edge to start scrolling
+set sidescrolloff=15 " Number of cols from horizontal edge to start scrolling
+set sidescroll=1       " Number of cols to scroll at a time
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
+
+""maximize vim window
+"com! MAX :let &lines=500<bar>let &columns=500
+"map <leader>m :MAX<CR> move the cursor in insert mode
+
+" move the cursor in insert mode
+imap <C-h> <C-o>h
+imap <C-j> <C-o>j
+imap <C-k> <C-o>k
+imap <C-l> <C-o>l
+
+" Jump to start and end of line using the home row keys
+nnoremap <c-h> ^
+nnoremap <c-l> $
+
+" Remove All the Trailing Whitespacesa (http://vimbits.com/bits/47)
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
+
+" Only have cursorline in current window
+"autocmd WinLeave * set nocursorline
+"autocmd WinEnter * set cursorline
+
+"augroup CursorLine
+  "au!
+  "au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+   "this cause bug
+  "au WinLeave * setlocal nocursorline
+"augroup END
+
+
+" Highlight word at cursor without changing position (http://vimbits.com/bits/19)
+nnoremap <leader>h *<C-O>
+" Highlight word at cursor and then Ack it.
+nnoremap <leader>H *<C-O>:AckFromSearch!<CR>
+
+" Avoiding trailing white-space in Ruby files
+autocmd BufWritePre {*.rb,*.js,*.coffee,*.scss,*.haml} :%s/\s\+$//e
+
+" Open help to the right or in new tab
+cnoremap <expr> hr getcmdtype() == ':' && empty(getcmdline()) ? 'bo vert h ' : 'hr'
+cnoremap <expr> ht getcmdtype() == ':' && empty(getcmdline()) ? 'tab h '     : 'ht'
+
+" When opening a file, always jump to the last cursor position
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal g'\"" |
+\ endif
+
+" start gVim maximized? [not working]
+"au GUIEnter * simalt ~x
+
+nnoremap <leader>vs :source $MYVIMRC<CR>
+
+" Plugins {
+  " Session List {
+    " does not working :-(
+    nmap <leader>sl :SessionList<CR> 
+    nmap <leader>ss :SessionSave<CR>
+  " }
+
+  " Rainbow parentheses {
+    nnoremap <leader>r :RainbowParenthesesToggle<CR>
+  " }
+" }
+
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+" Make Y behave like other capitals
+nnoremap Y y$

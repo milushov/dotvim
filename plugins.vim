@@ -61,6 +61,8 @@ let g:ctrlp_map = '<leader>,'
 let g:ctrlp_cmd = 'CtrlP'
 
 nmap <leader>. :CtrlPClearCache<cr>:CtrlP<cr>
+nmap <leader>i :CtrlPBookmarkDir<cr>
+nmap <leader>ia :CtrlPBookmarkDirAdd<cr>
 nmap <leader>l :CtrlPLine<cr>
 nmap <leader>b :CtrlPBuff<cr>
 nmap <leader>m :CtrlPBufTag<cr>
@@ -87,7 +89,8 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -c
 " vertical splits; j - jump to first open buffer; r - open first in current buffer
 let g:ctrlp_open_multiple_files = 'vjr'
 
-let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'mixed', 'line']
+"let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'mixed', 'line']
+let g:ctrlp_extensions = ['bookmarkdir', 'buffertag', 'quickfix', 'mixed', 'line']
 
 " Fugitive
 " ,g for Ggrep
