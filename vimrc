@@ -375,3 +375,7 @@ cnoremap <C-e> <End>
 
 " Make Y behave like other capitals
 nnoremap Y y$
+
+" split right or below
+set splitright
+set splitbelow
