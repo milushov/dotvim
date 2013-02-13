@@ -401,3 +401,5 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 "imap <M-F> <C-O> :call ToggleFullScreen()<CR>
 "map <M-F3> :call ToggleFullScreen()<CR>
 "imap <M-F3> <C-O> :call ToggleFullScreen()<CR>
+
+au BufWritePre *.coffee checktime
