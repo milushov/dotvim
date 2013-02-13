@@ -136,7 +136,7 @@ set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=55 columns=167
+  set lines=54 columns=159
 else
   " This is console Vim.
   if exists("+lines")
