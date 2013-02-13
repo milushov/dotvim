@@ -17,16 +17,18 @@ source ~/.vim/before.vim
 
 Bundle "myusuf3/numbers.vim"
 Bundle "mattn/pastebin-vim"
-Bundle 'mikewest/vimroom'
 Bundle 'mattn/gist-vim'
+"Bundle 'mikewest/vimroom'
 Bundle "pangloss/vim-javascript"
 Bundle "majutsushi/tagbar"
-Bundle "vim-scripts/loremipsum"
 Bundle "kien/tabman.vim"
+Bundle "vim-scripts/loremipsum"
 Bundle "gorkunov/smartgf.vim"
 Bundle "gorkunov/smartpairs.vim"
 Bundle "kien/rainbow_parentheses.vim"
 Bundle "skammer/vim-css-color"
+Bundle "maksimr/vim-translator"
+"Bundle 'Valloric/YouCompleteMe'
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
@@ -134,7 +136,7 @@ set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=56 columns=167
+  set lines=55 columns=167
 else
   " This is console Vim.
   if exists("+lines")
@@ -217,8 +219,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '.+\v\.(png|jpg|jpeg|gif)$',
   \ }
 
-nmap <F8> :TagbarToggle<CR>
-
 " ruler http://stackoverflow.com/a/3765575/1171144
 if exists('+colorcolumn')
   set colorcolumn=81
@@ -291,7 +291,7 @@ nmap <S-Tab> gT
 nnoremap ; :
 vnoremap ; :
 
-inoremap kj <Esc>
+inoremap kk <Esc>
 
 " I can type :help on my own, thanks.
 noremap <F1> <Esc>
@@ -357,6 +357,11 @@ autocmd BufReadPost *
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
 " Plugins {
+  " Taglist {
+    nmap <F8> :TagbarToggle<CR>
+    let g:tagbar_autoclose = 1
+  " }
+
   " Session List {
     " does not working :-(
     nmap <leader>sl :SessionList<CR> 
@@ -365,6 +370,10 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 
   " Rainbow parentheses {
     nnoremap <leader>r :RainbowParenthesesToggle<CR>
+  " }
+
+  " nerd tree {
+    let g:NERDTreeQuitOnOpen = 1
   " }
 " }
 
@@ -379,3 +388,16 @@ nnoremap Y y$
 " split right or below
 set splitright
 set splitbelow
+
+" http://goo.gl/Upx7U
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
+
+"function! ToggleFullScreen()
+  "call system("wmctrl -i -r ".v:windowid." -b toggle,fullscreen")
+  "redraw
+"endfunction
+
+"map <M-F> :call ToggleFullScreen()<CR>
+"imap <M-F> <C-O> :call ToggleFullScreen()<CR>
+"map <M-F3> :call ToggleFullScreen()<CR>
+"imap <M-F3> <C-O> :call ToggleFullScreen()<CR>
