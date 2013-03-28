@@ -1,4 +1,6 @@
 " TODO
+"
+
 " http://vimcasts.org/episodes/tidying-whitespace/
 
 source ~/.vim/bundles.vim " all plugins
@@ -21,14 +23,30 @@ Bundle 'mattn/gist-vim'
 "Bundle 'mikewest/vimroom'
 Bundle "pangloss/vim-javascript"
 Bundle "majutsushi/tagbar"
+
+let g:tagbar_type_ruby = {
+  \ 'kinds' : [
+    \ 'm:modules',
+    \ 'c:classes',
+    \ 'd:describes',
+    \ 'C:contexts',
+    \ 'f:methods',
+    \ 'F:singleton methods'
+  \ ]
+\ }
+
 Bundle "kien/tabman.vim"
 Bundle "vim-scripts/loremipsum"
-Bundle "gorkunov/smartgf.vim"
+"Bundle "gorkunov/smartgf.vim"
 Bundle "gorkunov/smartpairs.vim"
 Bundle "kien/rainbow_parentheses.vim"
 Bundle "skammer/vim-css-color"
 Bundle "maksimr/vim-translator"
 "Bundle 'Valloric/YouCompleteMe'
+
+"Bundle "xolox/vim-session"
+"let g:session_autosave = 'yes'
+"let g:session_autoload = 'yes'
 
 " after.vim is loaded from ./after/plugin/after.vim
 " which should place it AFTER all the other plugins in the loading order
@@ -66,7 +84,7 @@ set ignorecase " Игнорировать регистр букв при пои�
 set guitablabel=%t " tab name
 set nobackup " Отключаеd создание бэкапов
 set noswapfile " Отключаем создание swap файлов
-set clipboard=unnamedplus " Работать с буфером обмена сиситемы
+set clipboard=unnamed " Работать с буфером обмена сиситемы
 " Убрать тулбары
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -76,10 +94,13 @@ filetype on
 filetype plugin on
 filetype indent on
 
+set guifont=Menlo\ Regular\ for\ Powerline:h12
 let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
-let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]] " Overriding dividers
+"let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]] " Overriding dividers
+"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8*/
+"set guifont=Menlo:h12
 ":set guifont=Terminus\ 12
+"set guifont=Monaco:h12
 
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
 let g:indent_guides_enable_on_vim_startup = 0
@@ -131,21 +152,22 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 " And load session with F3
 "map <F3> :source ~/vim_session <cr>
 
-set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
+"set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
+"set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize
 
-if has("gui_running")
+"if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=54 columns=159
-else
+  "set lines=54 columns=159
+"else
   " This is console Vim.
-  if exists("+lines")
-    set lines=55
-  endif
-  if exists("+columns")
-    set columns=165
-  endif
-endif
+  "if exists("+lines")
+    "set lines=55
+  "endif
+  "if exists("+columns")
+    "set columns=165
+  "endif
+"endif
 
 fu! SaveSess()
   execute 'mksession! ' . getcwd() . '/.session.vim'
@@ -153,7 +175,7 @@ endfunction
 
 fu! RestoreSess()
   if filereadable(getcwd() . '/.session.vim')
-    execute 'so ' . getcwd() . '/.session.vim'
+    execute 'source ' . getcwd() . '/.session.vim'
     if bufexists(1)
       for l in range(1, bufnr('$'))
         if bufwinnr(l) == -1
@@ -169,10 +191,12 @@ endfunction
 if has('gui_running')
   if 0 == argc()
     :cd $cur_project
-    autocmd VimLeave * call SaveSess()
-    autocmd VimEnter * call RestoreSess()
+    "autocmd VimLeave * call SaveSess()
+    "autocmd VimEnter * call RestoreSess()
   end
 end
+
+
 " Mappings for working with splits
 
 " mapings from very very lazy man from there: http://vim.wikia.com/wiki/VimTip427 with my modifications
@@ -180,14 +204,14 @@ end
 " Maps Alt-[h,j,k,l] to resizing a window split
 :let resize_w = 20
 :let resize_h = 5
-map <silent> <A-h> :exe "vertical resize " . (winwidth(0) - resize_w)<CR>
-map <silent> <A-j> :exe "resize " . (winheight(0) - resize_h)<CR>
-map <silent> <A-k> :exe "resize " . (winheight(0) + resize_h)<CR>
-map <silent> <A-l> :exe "vertical resize " . (winwidth(0) + resize_w)<CR>
+map <silent> <M-h> :exe "vertical resize " . (winwidth(0) - resize_w)<CR>
+map <silent> <M-j> :exe "resize " . (winheight(0) - resize_h)<CR>
+map <silent> <M-k> :exe "resize " . (winheight(0) + resize_h)<CR>
+map <silent> <M-l> :exe "vertical resize " . (winwidth(0) + resize_w)<CR>
 
 " Maps Alt-[s.v] to horizontal and vertical split respectively
-map <silent> <A-s> :split<CR>
-map <silent> <A-v> :vsplit<CR>
+map <silent> <M-s> :split<CR>
+map <silent> <M-v> :vsplit<CR>
 
 " Maps Alt-[n,p] for moving next and previous window respectively
 map <silent> <A-n> <C-w><C-w>
@@ -358,8 +382,8 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 
 " Plugins {
   " Taglist {
-    nmap <F8> :TagbarToggle<CR>
-    let g:tagbar_autoclose = 1
+    " nmap <F8> :TagbarToggle<CR>
+    " let g:tagbar_autoclose = 1
   " }
 
   " Session List {
