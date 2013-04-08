@@ -103,7 +103,7 @@ let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
 "set guifont=Monaco:h12
 
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
-let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_enable_on_vim_startup = 1
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -125,9 +125,6 @@ nnoremap <C-j> mz:m+<CR>`z==
 vnoremap <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 
 " http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
-map <S-Enter> O<Esc>
-map <CR> o<Esc>
-
 map <S-Enter> O<Esc>j
 map <CR> o<Esc>k
 
