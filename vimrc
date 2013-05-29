@@ -1,11 +1,6 @@
-" TODO
-"
-
-" http://vimcasts.org/episodes/tidying-whitespace/
-
-source ~/.vim/bundles.vim " all plugins
-source ~/.vim/global.vim
-source ~/.vim/plugins.vim
+source ~/.vim/bundles.vim " list of all plugins
+source ~/.vim/global.vim " global stuff as nocompatible, syntax on
+source ~/.vim/plugins.vim " settings for plugins
 source ~/.vim/macros.vim
 
 if has('gui_running')
@@ -15,25 +10,27 @@ end
 " vimrc is loaded BEFORE the plugins
 source ~/.vim/before.vim
 
-:let $cur_project = '~/Dropbox/r/miel'   "current working derectory
+:let $cur_project = '~/Dropbox/code/miel'   "current working derectory
 
+let g:enable_numbers = 0
 Bundle "myusuf3/numbers.vim"
+
 Bundle "mattn/pastebin-vim"
 Bundle 'mattn/gist-vim'
 "Bundle 'mikewest/vimroom'
 Bundle "pangloss/vim-javascript"
-Bundle "majutsushi/tagbar"
+"Bundle 'majutsushi/tagbar'
 
-let g:tagbar_type_ruby = {
-  \ 'kinds' : [
-    \ 'm:modules',
-    \ 'c:classes',
-    \ 'd:describes',
-    \ 'C:contexts',
-    \ 'f:methods',
-    \ 'F:singleton methods'
-  \ ]
-\ }
+"let g:tagbar_type_ruby = {
+  "\ 'kinds' : [
+    "\ 'm:modules',
+    "\ 'c:classes',
+    "\ 'd:describes',
+    "\ 'C:contexts',
+    "\ 'f:methods',
+    "\ 'F:singleton methods'
+  "\ ]
+"\ }
 
 Bundle "kien/tabman.vim"
 Bundle "vim-scripts/loremipsum"
@@ -42,6 +39,11 @@ Bundle "gorkunov/smartpairs.vim"
 Bundle "kien/rainbow_parentheses.vim"
 Bundle "skammer/vim-css-color"
 Bundle "maksimr/vim-translator"
+
+Bundle 'flazz/vim-colorschemes'
+Bundle 'noahfrederick/Hemisu'
+Bundle 'powerman/vim-plugin-ruscmd'
+
 "Bundle 'Valloric/YouCompleteMe'
 
 "Bundle "xolox/vim-session"
@@ -56,9 +58,15 @@ Bundle "maksimr/vim-translator"
 
 " next 60 lines is part of nicklassos's config
 
+Bundle 'flazz/vim-colorschemes'
 set nocompatible " make vim settings nocompatible with vi
 let molokai_original = 1
+
 colorscheme molokai
+"Bundle 'https://github.com/trapd00r/neverland-vim-theme'
+"colorscheme neverland
+":set background=ligth
+
 "colorscheme Tomorrow-Night-Eighties
 "colorscheme Tomorrow-Night
 set t_Co=256
@@ -104,13 +112,14 @@ let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
 
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
 let g:indent_guides_enable_on_vim_startup = 1
+set ts=2 sw=2 et
 
 " Source the vimrc file after saving it
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>v :edit $MYVIMRC<CR>
 
 " enabling indicate switching to insert mode
 " http://stackoverflow.com/questions/6488683/how-do-i-change-the-vim-cursor-in-insert-normal-mode/6489348#6489348
@@ -152,6 +161,8 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 "set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
 "set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize
 
+"set sessionoptions-=options  " Don't save options
+
 "if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
@@ -183,6 +194,7 @@ fu! RestoreSess()
   endif
 
   syntax on
+
 endfunction
 
 if has('gui_running')
@@ -190,6 +202,7 @@ if has('gui_running')
     :cd $cur_project
     "autocmd VimLeave * call SaveSess()
     "autocmd VimEnter * call RestoreSess()
+    "exe "source ~/.vim/colors/molokai.vim"
   end
 end
 
@@ -201,10 +214,10 @@ end
 " Maps Alt-[h,j,k,l] to resizing a window split
 :let resize_w = 20
 :let resize_h = 5
-map <silent> <M-h> :exe "vertical resize " . (winwidth(0) - resize_w)<CR>
-map <silent> <M-j> :exe "resize " . (winheight(0) - resize_h)<CR>
-map <silent> <M-k> :exe "resize " . (winheight(0) + resize_h)<CR>
-map <silent> <M-l> :exe "vertical resize " . (winwidth(0) + resize_w)<CR>
+map <silent> <A-h> :exe "vertical resize " . (winwidth(0) - resize_w)<CR>
+map <silent> <A-j> :exe "resize " . (winheight(0) - resize_h)<CR>
+map <silent> <A-k> :exe "resize " . (winheight(0) + resize_h)<CR>
+map <silent> <A-l> :exe "vertical resize " . (winwidth(0) + resize_w)<CR>
 
 " Maps Alt-[s.v] to horizontal and vertical split respectively
 map <silent> <M-s> :split<CR>
@@ -214,11 +227,10 @@ map <silent> <M-v> :vsplit<CR>
 map <silent> <A-n> <C-w><C-w>
 map <silent> <A-p> <C-w><S-w>
 
-" tab navigation
-nnoremap <C-T> :tabe<CR>
+" tab navigation ab
+"nnoremap <C-T> :tabe<CR> " turn off because <c-t> very usefull in  help topics
 "nnoremap <S-h> gT
 "nnoremap <S-l> gt
-
 " half-page smooth-scrolling
 :map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 :map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
@@ -286,19 +298,20 @@ set grepprg=ack
 hi level13c ctermfg=darkgreen guifg=darkgreen
 
 " from http://vimcasts.org/episodes/working-with-tabs/
-" for linux and windows users (using the control key)
-nnoremap <C-S-]> gt
-nnoremap <C-S-[> gT
-nnoremap <C-1> 1gt
-nnoremap <C-2> 2gt
-nnoremap <C-3> 3gt
-nnoremap <C-4> 4gt
-nnoremap <C-5> 5gt
-nnoremap <C-6> 6gt
-nnoremap <C-7> 7gt
-nnoremap <C-8> 8gt
-nnoremap <C-9> 9gt
-nnoremap <C-0> :tablast<CR>
+" For mac users (using the 'apple' key)
+map <D-S-]> gt
+map <D-S-[> gT
+map <D-1> 1gt
+map <D-2> 2gt
+map <D-3> 3gt
+map <D-4> 4gt
+map <D-5> 5gt
+map <D-6> 6gt
+map <D-7> 7gt
+map <D-8> 8gt
+map <D-9> 9gt
+map <D-0> :tablast<CR>
+
 
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 nnoremap <leader>w <C-w>v<C-w>l
@@ -423,4 +436,92 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 "map <M-F3> :call ToggleFullScreen()<CR>
 "imap <M-F3> <C-O> :call ToggleFullScreen()<CR>
 
+" for ctrl-vk
 au BufWritePre *.coffee checktime
+
+" Move tabs with alt + left|right
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+
+Bundle 'nelstrom/vim-visual-star-search'
+
+Bundle 'Lokaltog/vim-easymotion'
+let g:EasyMotion_leader_key = '<Leader>e'
+
+"colorscheme github
+
+"Bundle 'stephenmckinney/vim-solarized-powerline'
+"let g:Powerline_theme='short'
+"let g:Powerline_colorscheme='solarized16_dark'
+
+"set background=solarized
+"let g:solarized_termcolors=256
+"colorscheme solarized
+"let g:Powerline_colorscheme='solarized'
+
+
+" next few lines taken from here https://github.com/freshtonic/dotfiles/blob/master/vimrc
+
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L g_
+
+" Same when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+
+Bundle 'airblade/vim-gitgutter'
+nmap gh <Plug>GitGutterNextHunk
+nmap gH <Plug>GitGutterPrevHunk
+
+"au BufRead,BufNewFile *.sass set filetype=css
+
+Bundle 'Shougo/neocomplcache'
+let g:neocomplcache_enable_at_startup = 1
+
+
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'terryma/vim-expand-region'
+
+Bundle 'terryma/vim-smooth-scroll'
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1000, 20)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 1000, 20)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 1000, 40)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1000, 40)<CR>
+
+Bundle 'tacahiroy/ctrlp-funky'
+nnoremap <leader>f :CtrlPFunky<Cr> 
+nnoremap <Space>fU :execute 'CtrlPFunky '.expand('<cword>')<Cr>
+
+" Folding - http://vim.wikia.com/wiki/Folding
+" Customized version of folded text, idea by
+" http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
+"function! NeatFoldText()
+  "let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  "let lines_count = v:foldend - v:foldstart + 1
+  "let lines_count_text = '| ' . printf("%10s", lines_count . ' lines ')
+  "let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  "let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  "let lineCount = line("$")
+  "let foldPercentage = printf("[%.1f", (lines_count*1.0)/lineCount*100) . "%] "
+  "let foldtextend = lines_count_text . foldPercentage . repeat(foldchar, 8)
+  "let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  "return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+"endfunction
+
+"set foldtext=NeatFoldText()
+
+
+"set foldmethod=syntax
+set foldlevelstart=1
+
+" https://gist.github.com/andyfowler/1195581#comment-816251
+"Bundle 'sjl/vitality.vim'
+
+Bundle 'milkypostman/vim-togglelist'
+
+filetype on
+filetype plugin on
+filetype indent on
+syntax on
+Bundle 'FredKSchott/CoVim'

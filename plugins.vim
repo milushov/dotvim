@@ -58,7 +58,7 @@ let g:yankring_history_dir = '~/.backup'
 "let g:CommandTMatchWindowAtTop=1
 
 let g:ctrlp_map = '<leader>,'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 nmap <leader>. :CtrlPClearCache<cr>:CtrlP<cr>
 nmap <leader>i :CtrlPBookmarkDir<cr>
@@ -66,6 +66,7 @@ nmap <leader>ia :CtrlPBookmarkDirAdd<cr>
 nmap <leader>l :CtrlPLine<cr>
 nmap <leader>b :CtrlPBuff<cr>
 nmap <leader>m :CtrlPBufTag<cr>
+nmap <leader>M :CtrlPBufTagAll<cr>
 nmap <leader>M :CtrlPBufTagAll<cr>
 
 let g:ctrlp_clear_cache_on_exit = 1
@@ -90,7 +91,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -c
 let g:ctrlp_open_multiple_files = 'vjr'
 
 "let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'mixed', 'line']
-let g:ctrlp_extensions = ['bookmarkdir', 'buffertag', 'quickfix', 'mixed', 'line']
+let g:ctrlp_extensions = ['mixed', 'funky']
 
 " Fugitive
 " ,g for Ggrep
@@ -110,10 +111,13 @@ nmap <leader>k :Ack<space>
 let g:indentobject_meaningful_indentation = ["haml", "sass", "python", "yaml", "markdown"]
 
 " indent-guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-let g:indent_guides_color_change_percent = 5
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_guide_size = 2
+"let g:indent_guides_color_change_percent = 5
+
+" indentLine
+let g:indentLine_char = '┆'
 
 " VimClojure
 let g:vimclojure#ParenRainbow = 1

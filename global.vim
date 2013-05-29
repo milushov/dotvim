@@ -36,7 +36,7 @@ hi SpellErrors guibg=red guifg=black ctermbg=red ctermfg=black
                         " ignore these files when completing names and in
                         " explorer
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-set shell=/bin/bash     " use bash for shell commands
+set shell=/bin/zsh      " use bash for shell commands
 set autowriteall        " Automatically save before commands like :next and :make
 set hidden              " enable multiple modified buffers
 set history=1000
@@ -70,6 +70,10 @@ set smartcase           " do not ignore if search pattern has CAPS
 set ofu=syntaxcomplete#Complete
 let g:rubycomplete_buffer_loading = 0
 let g:rubycomplete_classes_in_global = 1
+
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType scss set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType sass set omnifunc=csscomplete#CompleteCSS
 
 " directory settings
 silent !mkdir -vp ~/.backup/undo/ > /dev/null 2>&1
