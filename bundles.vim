@@ -8,7 +8,7 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kien/ctrlp.vim'
-Bundle 'AutoComplPop'
+"Bundle 'AutoComplPop' make vim sooo slow
 "Bundle 'taglist.vim'
 Bundle 'YankRing.vim'
 Bundle 'tpope/vim-fugitive'

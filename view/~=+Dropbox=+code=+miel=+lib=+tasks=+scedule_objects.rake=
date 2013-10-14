@@ -1,0 +1,206 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <RightMouse> <Plug>delimitMateMRightMouse
+imap <buffer> <LeftMouse> <Plug>delimitMateMLeftMouse
+imap <buffer> <S-Up> <Plug>delimitMateS-Up
+imap <buffer> <S-Down> <Plug>delimitMateS-Down
+imap <buffer> <PageDown> <Plug>delimitMatePageDown
+imap <buffer> <PageUp> <Plug>delimitMatePageUp
+imap <buffer> <Down> <Plug>delimitMateDown
+imap <buffer> <Up> <Plug>delimitMateUp
+imap <buffer> <C-Right> <Plug>delimitMateC-Right
+imap <buffer> <C-Left> <Plug>delimitMateC-Left
+imap <buffer> <End> <Plug>delimitMateEnd
+imap <buffer> <Home> <Plug>delimitMateHome
+imap <buffer> <Right> <Plug>delimitMateRight
+imap <buffer> <Left> <Plug>delimitMateLeft
+imap <buffer> <Del> <Plug>delimitMateDel
+imap <buffer> <S-BS> <Plug>delimitMateS-BS
+imap <buffer> <BS> <Plug>delimitMateBS
+inoremap <buffer> <Plug>delimitMateJumpMany =len(b:_l_delimitMate_buffer) ? delimitMate#Finish(0) : delimitMate#JumpMany()
+imap <buffer> <M-Right> <Plug>delimitMateM-Right
+imap <buffer> <M-Left> <Plug>delimitMateM-Left
+imap <buffer> <D-Right> <Plug>delimitMateD-Right
+imap <buffer> <D-Left> <Plug>delimitMateD-Left
+imap <buffer> <C-ScrollWheelRight> <Plug>delimitMateC-ScrollWheelRight
+imap <buffer> <S-ScrollWheelRight> <Plug>delimitMateS-ScrollWheelRight
+imap <buffer> <ScrollWheelRight> <Plug>delimitMateScrollWheelRight
+imap <buffer> <C-ScrollWheelLeft> <Plug>delimitMateC-ScrollWheelLeft
+imap <buffer> <S-ScrollWheelLeft> <Plug>delimitMateS-ScrollWheelLeft
+imap <buffer> <ScrollWheelLeft> <Plug>delimitMateScrollWheelLeft
+imap <buffer> <C-ScrollWheelDown> <Plug>delimitMateC-ScrollWheelDown
+imap <buffer> <S-ScrollWheelDown> <Plug>delimitMateS-ScrollWheelDown
+imap <buffer> <ScrollWheelDown> <Plug>delimitMateScrollWheelDown
+imap <buffer> <C-ScrollWheelUp> <Plug>delimitMateC-ScrollWheelUp
+imap <buffer> <S-ScrollWheelUp> <Plug>delimitMateS-ScrollWheelUp
+imap <buffer> <ScrollWheelUp> <Plug>delimitMateScrollWheelUp
+nmap <buffer> gf <Plug>RailsTabFind
+nmap <buffer> f <Plug>RailsSplitFind
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nmap <buffer> gf <Plug>RailsFind
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+imap <buffer> <silent> g <Plug>delimitMateJumpMany
+imap <buffer>   <Plug>delimitMateSpace
+imap <buffer> " <Plug>delimitMate"
+imap <buffer> ' <Plug>delimitMate'
+imap <buffer> ( <Plug>delimitMate(
+imap <buffer> ) <Plug>delimitMate)
+imap <buffer> [ <Plug>delimitMate[
+imap <buffer> ] <Plug>delimitMate]
+imap <buffer> ` <Plug>delimitMate`
+imap <buffer> { <Plug>delimitMate{
+imap <buffer> } <Plug>delimitMate}
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal balloonexpr=
+setlocal binary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=:0,(s,u0,U1,g0,t0
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=81
+setlocal comments=:#
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=inc
+setlocal conceallevel=1
+setlocal completefunc=neocomplcache#complete#manual_complete
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\s*def\\s\\+\\(self\\.\\)\\=\\|^\\s*\\%(task\\|file\\)\\s\\+[:'\"]
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'ruby'
+setlocal filetype=ruby
+endif
+setlocal foldcolumn=3
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=/
+setlocal foldlevel=4
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=RailsIncludeexpr()
+setlocal indentexpr=GetRubyIndent(v:lnum)
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,!,?,=,$
+setlocal keywordprg=ri\ -T\ -f\ bs
+setlocal linebreak
+setlocal nolisp
+setlocal list
+setlocal nomacmeta
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal nomodeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+setlocal nonumber
+setlocal numberwidth=3
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=lib,vendor,app/models/concerns,app/controllers/concerns,app/controllers,app/helpers,app/mailers,app/models,app/*,app/views,test,test/unit,test/functional,test/integration,test/controllers,test/helpers,test/mailers,test/models,spec,spec/controllers,spec/helpers,spec/mailers,spec/models,spec/views,spec/lib,spec/features,spec/requests,spec/integration,vendor/plugins/*/lib,vendor/plugins/*/test,vendor/rails/*/lib,vendor/rails/*/test,~/Dropbox/code/miel,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/site_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.3.0,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/site_ruby,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/vendor_ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.3.0,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/x86_64-darwin12.3.0,~/.rvm/gems/ruby-1.9.3-p429/gems/RedCloth-4.2.9/lib,~/.rvm/gems/ruby-1.9.3-p429/gems/arbre-1.0.1
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal relativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,1)
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'ruby'
+setlocal syntax=ruby
+endif
+setlocal tabstop=2
+setlocal tags=~/Dropbox/code/miel/tags,~/Dropbox/code/miel/tmp/tags,~/Dropbox/code/miel/.git/ruby.tags,~/Dropbox/code/miel/.git/tags,./tags,tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/site_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/site_ruby/1.9.1/x86_64-darwin12.3.0/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/vendor_ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/vendor_ruby/1.9.1/x86_64-darwin12.3.0/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/tags,~/.rvm/rubies/ruby-1.9.3-p429/lib/ruby/1.9.1/x86_64-darwin12.3.0/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/RedCloth-4.2.9/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/arbre-1.0.1/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/awesome_print-1.1.0/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/bcrypt-ruby-3.0.1/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/binding_of_caller-0.7.1/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/carrierwave-0.8.0/tags,~/.rvm/gems/ruby-1.9.3-p429/gems/climate_co
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal undofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal nowrap
+setlocal wrapmargin=0
+silent! normal! zE
+76,76fold
+80,80fold
+11,81fold
+152,152fold
+158,159fold
+175,178fold
+172,181fold
+185,185fold
+196,209fold
+161,212fold
+242,243fold
+236,250fold
+261,261fold
+258,263fold
+151,266fold
+276,282fold
+286,286fold
+288,288fold
+273,289fold
+297,303fold
+309,309fold
+311,311fold
+307,312fold
+294,313fold
+321,323fold
+320,324fold
+328,328fold
+319,329fold
+11
+normal! zo
+11
+normal! zc
+let s:l = 82 - ((81 * winheight(0) + 19) / 39)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+82
+normal! 0
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

@@ -10,7 +10,7 @@ end
 " vimrc is loaded BEFORE the plugins
 source ~/.vim/before.vim
 
-:let $cur_project = '~/Dropbox/code/miel'   "current working derectory
+:let $cur_project = '~/work/inmyroom/'   "current working derectory
 
 let g:enable_numbers = 0
 Bundle "myusuf3/numbers.vim"
@@ -21,51 +21,24 @@ Bundle 'mattn/gist-vim'
 Bundle "pangloss/vim-javascript"
 "Bundle 'majutsushi/tagbar'
 
-"let g:tagbar_type_ruby = {
-  "\ 'kinds' : [
-    "\ 'm:modules',
-    "\ 'c:classes',
-    "\ 'd:describes',
-    "\ 'C:contexts',
-    "\ 'f:methods',
-    "\ 'F:singleton methods'
-  "\ ]
-"\ }
 
-Bundle "kien/tabman.vim"
-Bundle "vim-scripts/loremipsum"
+"Bundle "kien/tabman.vim"
+"Bundle "vim-scripts/loremipsum"
 "Bundle "gorkunov/smartgf.vim"
 Bundle "gorkunov/smartpairs.vim"
-Bundle "kien/rainbow_parentheses.vim"
-Bundle "skammer/vim-css-color"
+"Bundle "kien/rainbow_parentheses.vim"
+"Bundle "skammer/vim-css-color"
+Bundle "noahfrederick/Hemisu"
 Bundle "maksimr/vim-translator"
-
 Bundle 'flazz/vim-colorschemes'
 Bundle 'noahfrederick/Hemisu'
-Bundle 'powerman/vim-plugin-ruscmd'
-
-"Bundle 'Valloric/YouCompleteMe'
-
-"Bundle "xolox/vim-session"
-"let g:session_autosave = 'yes'
-"let g:session_autoload = 'yes'
-
-" after.vim is loaded from ./after/plugin/after.vim
-" which should place it AFTER all the other plugins in the loading order
-" bindings.vim and local.vim are loaded from after.vim
-
-" set runtimepath=~/.vim,$VIMRUNTIME
-
-" next 60 lines is part of nicklassos's config
-
+"Bundle 'powerman/vim-plugin-ruscmd'
 Bundle 'flazz/vim-colorschemes'
-set nocompatible " make vim settings nocompatible with vi
-let molokai_original = 1
 
 colorscheme molokai
-"Bundle 'https://github.com/trapd00r/neverland-vim-theme'
-"colorscheme neverland
-":set background=ligth
+":set background=light
+"let molokai_original = 1
+"let g:rehash256 = 1
 
 "colorscheme Tomorrow-Night-Eighties
 "colorscheme Tomorrow-Night
@@ -81,6 +54,7 @@ set autoread
 set smartcase " Override the 'ignorecase' option if the search pattern contains upper case characters
 set incsearch
 set shiftround " drop unused spaces
+
 "set wrap " перенос длинных строк
 set lbr " переносить целые слова
 set mousehide " скрывать мышь в режиме ввода текста
@@ -104,22 +78,13 @@ filetype indent on
 
 set guifont=Menlo\ Regular\ for\ Powerline:h12
 let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
-"let g:Powerline_dividers_override = [[0x2b81], [0x2b81], '', [0x2b83]] " Overriding dividers
-"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8*/
-"set guifont=Menlo:h12
-":set guifont=Terminus\ 12
-"set guifont=Monaco:h12
 
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
 let g:indent_guides_enable_on_vim_startup = 1
 set ts=2 sw=2 et
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
-
 nmap <leader>v :edit $MYVIMRC<CR>
+nnoremap <leader>vs :source $MYVIMRC<CR>
 
 " enabling indicate switching to insert mode
 " http://stackoverflow.com/questions/6488683/how-do-i-change-the-vim-cursor-in-insert-normal-mode/6489348#6489348
@@ -142,7 +107,7 @@ map <CR> o<Esc>k
 :vmap <C-h> xhPgvhoho
 
 " enable unselecting of searchig results by press space key two times or escape key
-map <SPACE> <SPACE>:noh<CR>
+"map <SPACE> <SPACE>:noh<CR>
 nnoremap <esc> :noh<return><esc>
 
 map <C-s> :w
@@ -152,30 +117,6 @@ noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
 
-" Global session
-" Quick write session with F2
-"map <F2> :mksession! ~/vim_session <cr>
-" And load session with F3
-"map <F3> :source ~/vim_session <cr>
-
-"set sessionoptions+=resize,winpos,blank,buffers,curdir,folds,tabpages,winsize
-"set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize
-
-"set sessionoptions-=options  " Don't save options
-
-"if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window.
-  "set lines=54 columns=159
-"else
-  " This is console Vim.
-  "if exists("+lines")
-    "set lines=55
-  "endif
-  "if exists("+columns")
-    "set columns=165
-  "endif
-"endif
 
 fu! SaveSess()
   execute 'mksession! ' . getcwd() . '/.session.vim'
@@ -192,9 +133,7 @@ fu! RestoreSess()
       endfor
     endif
   endif
-
   syntax on
-
 endfunction
 
 if has('gui_running')
@@ -202,7 +141,6 @@ if has('gui_running')
     :cd $cur_project
     "autocmd VimLeave * call SaveSess()
     "autocmd VimEnter * call RestoreSess()
-    "exe "source ~/.vim/colors/molokai.vim"
   end
 end
 
@@ -227,10 +165,6 @@ map <silent> <M-v> :vsplit<CR>
 map <silent> <A-n> <C-w><C-w>
 map <silent> <A-p> <C-w><S-w>
 
-" tab navigation ab
-"nnoremap <C-T> :tabe<CR> " turn off because <c-t> very usefull in  help topics
-"nnoremap <S-h> gT
-"nnoremap <S-l> gt
 " half-page smooth-scrolling
 :map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 :map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
@@ -243,6 +177,7 @@ let g:pastebin_private = '1'
 nnoremap <leader>vr :VimroomToggle<cr>
 
 let g:NERDTreeWinPos = 'right'
+let g:NERDTreeWinSize = 50
 
 ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
 
@@ -283,34 +218,31 @@ function! ID_search()
   execute "next " . x
 endfun
 
-":nmap <C-a> ggVG"*yG<CR>
-":nmap <C-a> ggVG<CR>
-":nmap <C-a> :%y<CR>
 
 " select all
 noremap <c-a> ggVG
 
 " http://vim.wikia.com/wiki/Open_PDF_files
-:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
-:command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
+":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
 
 set grepprg=ack
 hi level13c ctermfg=darkgreen guifg=darkgreen
 
 " from http://vimcasts.org/episodes/working-with-tabs/
 " For mac users (using the 'apple' key)
-map <D-S-]> gt
-map <D-S-[> gT
-map <D-1> 1gt
-map <D-2> 2gt
-map <D-3> 3gt
-map <D-4> 4gt
-map <D-5> 5gt
-map <D-6> 6gt
-map <D-7> 7gt
-map <D-8> 8gt
-map <D-9> 9gt
-map <D-0> :tablast<CR>
+"map <D-S-]> gt
+"map <D-S-[> gT
+"map <D-1> 1gt
+"map <D-2> 2gt
+"map <D-3> 3gt
+"map <D-4> 4gt
+"map <D-5> 5gt
+"map <D-6> 6gt
+"map <D-7> 7gt
+"map <D-8> 8gt
+"map <D-9> 9gt
+"map <D-0> :tablast<CR>
 
 
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
@@ -324,6 +256,7 @@ nmap <S-Tab> gT
 
 nnoremap ; :
 vnoremap ; :
+cnoremap ; :
 
 inoremap kk <Esc>
 
@@ -331,7 +264,7 @@ inoremap kk <Esc>
 noremap <F1> <Esc>
 
 " ****************** SCROLLING *********************  
-set scrolloff=8         " Number of lines from vertical edge to start scrolling
+set scrolloff=20        " Number of lines from vertical edge to start scrolling
 set sidescrolloff=15 " Number of cols from horizontal edge to start scrolling
 set sidescroll=1       " Number of cols to scroll at a time
 
@@ -355,18 +288,6 @@ nnoremap <c-l> $
 " Remove All the Trailing Whitespacesa (http://vimbits.com/bits/47)
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
 
-" Only have cursorline in current window
-"autocmd WinLeave * set nocursorline
-"autocmd WinEnter * set cursorline
-
-"augroup CursorLine
-  "au!
-  "au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-   "this cause bug
-  "au WinLeave * setlocal nocursorline
-"augroup END
-
-
 " Highlight word at cursor without changing position (http://vimbits.com/bits/19)
 nnoremap <leader>h *<C-O>
 " Highlight word at cursor and then Ack it.
@@ -388,28 +309,7 @@ autocmd BufReadPost *
 " start gVim maximized? [not working]
 "au GUIEnter * simalt ~x
 
-nnoremap <leader>vs :source $MYVIMRC<CR>
-
-" Plugins {
-  " Taglist {
-    " nmap <F8> :TagbarToggle<CR>
-    " let g:tagbar_autoclose = 1
-  " }
-
-  " Session List {
-    " does not working :-(
-    nmap <leader>sl :SessionList<CR> 
-    nmap <leader>ss :SessionSave<CR>
-  " }
-
-  " Rainbow parentheses {
-    nnoremap <leader>r :RainbowParenthesesToggle<CR>
-  " }
-
-  " nerd tree {
-    let g:NERDTreeQuitOnOpen = 1
-  " }
-" }
+let g:NERDTreeQuitOnOpen = 1
 
 cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
@@ -426,16 +326,6 @@ set splitbelow
 " http://goo.gl/Upx7U
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
 
-"function! ToggleFullScreen()
-  "call system("wmctrl -i -r ".v:windowid." -b toggle,fullscreen")
-  "redraw
-"endfunction
-
-"map <M-F> :call ToggleFullScreen()<CR>
-"imap <M-F> <C-O> :call ToggleFullScreen()<CR>
-"map <M-F3> :call ToggleFullScreen()<CR>
-"imap <M-F3> <C-O> :call ToggleFullScreen()<CR>
-
 " for ctrl-vk
 au BufWritePre *.coffee checktime
 
@@ -447,17 +337,6 @@ Bundle 'nelstrom/vim-visual-star-search'
 
 Bundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_leader_key = '<Leader>e'
-
-"colorscheme github
-
-"Bundle 'stephenmckinney/vim-solarized-powerline'
-"let g:Powerline_theme='short'
-"let g:Powerline_colorscheme='solarized16_dark'
-
-"set background=solarized
-"let g:solarized_termcolors=256
-"colorscheme solarized
-"let g:Powerline_colorscheme='solarized'
 
 
 " next few lines taken from here https://github.com/freshtonic/dotfiles/blob/master/vimrc
@@ -473,8 +352,8 @@ nnoremap g, g,zz
 Bundle 'airblade/vim-gitgutter'
 nmap gh <Plug>GitGutterNextHunk
 nmap gH <Plug>GitGutterPrevHunk
+vmap <silent> u <esc>:Gdiff<cr>gv:diffget<cr><c-w><c-w>ZZ
 
-"au BufRead,BufNewFile *.sass set filetype=css
 
 Bundle 'Shougo/neocomplcache'
 let g:neocomplcache_enable_at_startup = 1
@@ -483,37 +362,31 @@ let g:neocomplcache_enable_at_startup = 1
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
 
-Bundle 'terryma/vim-smooth-scroll'
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1000, 20)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 1000, 20)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 1000, 40)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1000, 40)<CR>
+set wildignore+=*/tmp/*,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '.+\v\.(png|jpg|jpeg|gif)$',
+  \ }
+
+let g:ctrlp_mruf_exclude = '/tmp/.*'
+let g:ctrlp_max_files = 20000
+let g:ctrlp_max_depth = 40
 
 Bundle 'tacahiroy/ctrlp-funky'
 nnoremap <leader>f :CtrlPFunky<Cr> 
-nnoremap <Space>fU :execute 'CtrlPFunky '.expand('<cword>')<Cr>
+"nnoremap <Space>fU :execute 'CtrlPFunky '.expand('<cword>')<Cr>
 
-" Folding - http://vim.wikia.com/wiki/Folding
-" Customized version of folded text, idea by
-" http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
-"function! NeatFoldText()
-  "let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  "let lines_count = v:foldend - v:foldstart + 1
-  "let lines_count_text = '| ' . printf("%10s", lines_count . ' lines ')
-  "let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  "let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  "let lineCount = line("$")
-  "let foldPercentage = printf("[%.1f", (lines_count*1.0)/lineCount*100) . "%] "
-  "let foldtextend = lines_count_text . foldPercentage . repeat(foldchar, 8)
-  "let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  "return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-"endfunction
+let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
 
-"set foldtext=NeatFoldText()
+func! MyCtrlPMappings()
+    nnoremap <buffer> <silent> <c-@> :call <sid>DeleteBuffer()<cr>
+endfunc
 
+func! s:DeleteBuffer()
+    exec "bd" fnamemodify(getline('.')[2:], ':p')
+    exec "norm \<F5>"
+endfunc
 
-"set foldmethod=syntax
-set foldlevelstart=1
 
 " https://gist.github.com/andyfowler/1195581#comment-816251
 "Bundle 'sjl/vitality.vim'
@@ -524,4 +397,134 @@ filetype on
 filetype plugin on
 filetype indent on
 syntax on
-Bundle 'FredKSchott/CoVim'
+
+let g:gist_clip_command = 'pbcopy'
+
+":set &t_Co=256
+"Bundle 'rking/vim-detailed'
+"colo detailed
+autocmd BufReadPost * call SetCursorPosition()
+
+function! SetCursorPosition()
+    if &filetype !~ 'commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal! g`\""
+            normal! zz
+        endif
+    end
+endfunction
+
+set foldcolumn=4
+
+" Folding - http://vim.wikia.com/wiki/Folding {{{1
+" Customized version of folded text, idea by
+" http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
+function! NeatFoldText() "{{{2
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines ')
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let lineCount = line("$")
+  let foldPercentage = printf("[%.1f", (lines_count*1.0)/lineCount*100) . "%] "
+  let foldtextend = lines_count_text . foldPercentage . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+"}}}
+set foldtext=NeatFoldText()
+
+function! MarkdownFolds()
+  let thisline = getline(v:lnum)
+  if match(thisline, '^##') >= 0
+    return ">2"
+  elseif match(thisline, '^#') >= 0
+    return ">1"
+  else
+    return "="
+  endif
+endfunction
+
+" markdown folding {{{3
+function! MarkdownFoldText()
+  let foldsize = (v:foldend-v:foldstart)
+  return getline(v:foldstart).' ('.foldsize.' lines)'
+endfunction
+
+au BufEnter *.md setlocal foldexpr=MarkdownFolds()
+au BufEnter *.md setlocal foldmethod=expr
+au BufEnter *.md setlocal foldtext=MarkdownFoldText()
+au BufEnter *.md setlocal syntax=markdown
+" }}}
+
+set foldmethod=syntax
+set foldlevelstart=1
+
+let javaScript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML
+
+" Marker only vim files
+:autocmd FileType vim setlocal fdm=marker
+:autocmd FileType coffee setlocal fdm=indent
+:autocmd FileType haml setlocal fdm=indent
+
+nnoremap <Space> za
+"}}}
+Bundle 'rking/ag.vim'
+Bundle 'Floobits/floobits-vim'
+"Bundle 'rorymckinley/vim-rubyhash'  не работает на максини 
+noremap <silent> <F4> :let @+ = expand("%")<CR> "http://goo.gl/W5wFy
+Bundle 'moll/vim-bbye'
+
+" 'quote' a word
+"nnoremap qw :silent! normal mpea'<Esc>bi'<Esc>`pl
+" double "quote" a word
+"nnoremap qd :silent! normal mpea"<Esc>bi"<Esc>`pl
+" remove quotes from a word
+"nnoremap wq :silent! normal mpeld bhd `ph<CR>
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+:nmap <silent> <leader>d <Plug>DashSearch
+
+let g:ruby_path=$RUBY_BIN
+
+" GREAT! make shorcuts   sj ,  sk
+Bundle 'AndrewRadev/splitjoin.vim'
+highlight NonText guifg=bg
+
+" http://stackoverflow.com/questions/11993851/how-to-delete-not-cut
+"nnoremap d "_d
+"vnoremap d "_d
+
+"set wrap
+
+"Bundle 'onemanstartup/vim-flog'
+"silent exe 'g:flog_enable'
+"Bundle 'rainerborene/vim-reek'
+
+"let coffee_lint_options = '-f ~/.coffeelint_config.json'
+
+set cursorline
+
+" Great! - to toggle some definitions
+Bundle 'AndrewRadev/switch.vim'
+nnoremap - :Switch<cr>
+
+set relativenumber
+set number
+"}}}
+" 21 executing external commands{{{
+" TODO: Check for usefullness of zsh in vim
+set sh=/usr/local/bin/zsh
+"}}}
+" 22 running make and jumping to errors
+" 23 language specific{{{
+" Russian is specific
+set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+"}}}
