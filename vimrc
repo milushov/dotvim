@@ -76,7 +76,7 @@ filetype on
 filetype plugin on
 filetype indent on
 
-set guifont=Menlo\ Regular\ for\ Powerline:h12
+set guifont=Menlo\ Regular\ for\ Powerline:h14
 let g:Powerline_symbols = 'fancy' " Powerline (makes neat status bar)
 
 " hide bold vertical line (line, which is part of dotvim from astrails) https://github.com/astrails/dotvim/issues/14
@@ -521,7 +521,7 @@ set number
 "}}}
 " 21 executing external commands{{{
 " TODO: Check for usefullness of zsh in vim
-set sh=/usr/local/bin/zsh
+" set sh=/usr/local/bin/zsh
 "}}}
 " 22 running make and jumping to errors
 " 23 language specific{{{
