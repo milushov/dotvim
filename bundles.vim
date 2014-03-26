@@ -6,11 +6,14 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-commentary'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'kien/ctrlp.vim'
+Bundle 'tommcdo/vim-exchange'
+Bundle 'tpope/vim-unimpaired'
 "Bundle 'AutoComplPop' make vim sooo slow
 "Bundle 'taglist.vim'
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'msanders/snipmate.vim'

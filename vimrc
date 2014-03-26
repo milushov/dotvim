@@ -10,7 +10,7 @@ end
 " vimrc is loaded BEFORE the plugins
 source ~/.vim/before.vim
 
-:let $cur_project = '~/work/inmyroom/'   "current working derectory
+:let $cur_project = '~/work/MarvinProject/'   "current working derectory
 
 let g:enable_numbers = 0
 Bundle "myusuf3/numbers.vim"
@@ -19,6 +19,7 @@ Bundle "mattn/pastebin-vim"
 Bundle 'mattn/gist-vim'
 "Bundle 'mikewest/vimroom'
 Bundle "pangloss/vim-javascript"
+"g:javascript_conceal = 1
 "Bundle 'majutsushi/tagbar'
 
 
@@ -30,6 +31,13 @@ Bundle "gorkunov/smartpairs.vim"
 "Bundle "skammer/vim-css-color"
 Bundle "noahfrederick/Hemisu"
 Bundle "maksimr/vim-translator"
+
+let g:goog_user_conf = {
+  \'langpair': 'en|ru',
+  \'cmd': 'node',
+  \'v_key': 'T'
+\}
+
 Bundle 'flazz/vim-colorschemes'
 Bundle 'noahfrederick/Hemisu'
 "Bundle 'powerman/vim-plugin-ruscmd'
@@ -91,10 +99,12 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 :autocmd InsertEnter,InsertLeave * set cul!
 
 " enabling moving line up or down
-nnoremap <C-k> mz:m-2<CR>`z==
 inoremap <C-j> <Esc>:m+<CR>==gi
+nnoremap <C-k> mz:m-2<CR>`z==
+
 inoremap <C-k> <Esc>:m-2<CR>==gi
 vnoremap <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
+
 nnoremap <C-j> mz:m+<CR>`z==
 vnoremap <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 
@@ -181,14 +191,8 @@ let g:NERDTreeWinSize = 50
 
 ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
 
-set wildignore+=*/tmp/*,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '.+\v\.(png|jpg|jpeg|gif)$',
-  \ }
-
-" ruler http://stackoverflow.com/a/3765575/1171144
 if exists('+colorcolumn')
+  " ruler http://stackoverflow.com/a/3765575/1171144
   set colorcolumn=81
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -363,10 +367,16 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
 
 set wildignore+=*/tmp/*,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif
+
+" it's not wirking when g:ctrlp_user_command is set
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '.+\v\.(png|jpg|jpeg|gif)$',
+  \ 'file': '\v\.(png|jpg|jpeg|gif)$',
   \ }
+
+" overwirte variable from ~/.vim/plugins.vim
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -co |& egrep -v "\.(png|jpg|jpeg|gif)$"']
+
 
 let g:ctrlp_mruf_exclude = '/tmp/.*'
 let g:ctrlp_max_files = 20000
@@ -477,8 +487,9 @@ let xml_syntax_folding=1      " XML
 nnoremap <Space> za
 "}}}
 Bundle 'rking/ag.vim'
-Bundle 'Floobits/floobits-vim'
-"Bundle 'rorymckinley/vim-rubyhash'  не работает на максини 
+"Bundle 'Floobits/floobits-vim'
+"не работает на макмини
+"Bundle 'rorymckinley/vim-rubyhash'
 noremap <silent> <F4> :let @+ = expand("%")<CR> "http://goo.gl/W5wFy
 Bundle 'moll/vim-bbye'
 
@@ -528,3 +539,28 @@ set number
 " Russian is specific
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 "}}}
+"
+
+autocmd BufNewFile,BufRead,BufReadPost *.eco set syntax=html
+autocmd BufNewFile,BufRead,BufReadPost *.eco set fdm=indent
+autocmd BufNewFile,BufRead,BufReadPost *.eco set syntax=html
+
+
+autocmd BufNewFile,BufRead,BufReadPost *.slim set syntax=html
+autocmd BufNewFile,BufRead,BufReadPost *.slim set fdm=indent
+autocmd BufNewFile,BufRead,BufReadPost *.slim set syntax=slim
+
+" This plugin adds ic, ac, iC, and aC as text-objects. Use them in commands like vic, cic, and daC.
+Bundle  'coderifous/textobj-word-column.vim'
+" align
+Bundle 'junegunn/vim-easy-align'
+vnoremap <silent> <Enter> :EasyAlign<Enter>
+
+:nmap cp :let @* = expand("%")<CR>
+
+"set guifont=Source\ Code\ Pro\ 14
+let g:exchange_no_mappings=1
+nmap cx <Plug>(Exchange)
+vmap X <Plug>(Exchange)
+nmap cxc <Plug>(ExchangeClear)
+nmap cxx <Plug>(ExchangeLine)

@@ -58,9 +58,9 @@ let g:yankring_history_dir = '~/.backup'
 "let g:CommandTMatchWindowAtTop=1
 
 let g:ctrlp_map = '<leader>,'
-let g:ctrlp_cmd = 'CtrlPMixed'
+"let g:ctrlp_cmd = 'CtrlPMixed'
 
-nmap <leader>. :CtrlPClearCache<cr>:CtrlP<cr>
+nmap <leader>. :CtrlPClearAllCache<cr>:CtrlP<cr>
 nmap <leader>i :CtrlPBookmarkDir<cr>
 nmap <leader>ia :CtrlPBookmarkDirAdd<cr>
 nmap <leader>l :CtrlPLine<cr>
@@ -83,7 +83,7 @@ let g:ctrlp_max_height = 40
 let g:ctrlp_switch_buffer = 1
 
 " if in git repo - use git file listing command, should be faster
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -cod']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -co ']
 
 " open multiple files with <c-z> to mark and <c-o> to open. v - opening in
 " vertical splits; j - jump to first open buffer; r - open first in current buffer
