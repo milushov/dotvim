@@ -10,13 +10,13 @@ end
 " vimrc is loaded BEFORE the plugins
 source ~/.vim/before.vim
 
-:let $cur_project = '~/work/MarvinProject/'   "current working derectory
+":let $cur_project = '~/work/MarvinProject/'   "current working derectory
+:let $cur_project = '~/work/aimpr/'   "current working derectory
 
 let g:enable_numbers = 0
 Bundle "myusuf3/numbers.vim"
 
 Bundle "mattn/pastebin-vim"
-Bundle 'mattn/gist-vim'
 "Bundle 'mikewest/vimroom'
 Bundle "pangloss/vim-javascript"
 "g:javascript_conceal = 1
@@ -29,8 +29,12 @@ Bundle "pangloss/vim-javascript"
 Bundle "gorkunov/smartpairs.vim"
 "Bundle "kien/rainbow_parentheses.vim"
 "Bundle "skammer/vim-css-color"
-Bundle "noahfrederick/Hemisu"
 Bundle "maksimr/vim-translator"
+Bundle "mtscout6/vim-cjsx"
+Bundle "othree/html5.vim"
+Bundle "evanmiller/nginx-vim-syntax"
+
+autocmd BufNewFile,BufRead *.csx,*.cjsx set filetype=coffee
 
 let g:goog_user_conf = {
   \'langpair': 'en|ru',
@@ -38,7 +42,6 @@ let g:goog_user_conf = {
   \'v_key': 'T'
 \}
 
-Bundle 'flazz/vim-colorschemes'
 Bundle 'noahfrederick/Hemisu'
 "Bundle 'powerman/vim-plugin-ruscmd'
 Bundle 'flazz/vim-colorschemes'
@@ -187,7 +190,8 @@ let g:pastebin_private = '1'
 nnoremap <leader>vr :VimroomToggle<cr>
 
 let g:NERDTreeWinPos = 'right'
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 40
+let g:NERDTreeRespectWildIgnore = 0
 
 ino <silent> <c-r><tab> <c-r>=ShowAvailableSnips()<cr>
 
@@ -198,11 +202,11 @@ else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
-function! StartUp()
-  if 0 == argc()
-    NERDTree
-  end
-endfunction
+"function! StartUp()
+  "if 0 == argc()
+    "NERDTree
+  "end
+"endfunction
 
 if has('gui_running')
   " fuck that, because on start with saved session
@@ -224,7 +228,7 @@ endfun
 
 
 " select all
-noremap <c-a> ggVG
+"noremap <c-a> ggVG
 
 " http://vim.wikia.com/wiki/Open_PDF_files
 ":command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
@@ -256,7 +260,13 @@ nnoremap <leader>w <C-w>v<C-w>l
 nmap <Tab> gt
 nmap <S-Tab> gT
 
+":au FocusLost,BufLeave,InsertLeave * silent! :update
 :au FocusLost,BufLeave * silent! :update
+
+" not working
+"Bundle 'sjl/vitality.vim'
+"autocmd BufLeave,FocusLost * silent! wall
+"autocmd! FocusGained
 
 nnoremap ; :
 vnoremap ; :
@@ -298,7 +308,7 @@ nnoremap <leader>h *<C-O>
 nnoremap <leader>H *<C-O>:AckFromSearch!<CR>
 
 " Avoiding trailing white-space in Ruby files
-autocmd BufWritePre {*.rb,*.js,*.coffee,*.scss,*.haml} :%s/\s\+$//e
+"autocmd BufWritePre {*.rb,*.js,*.coffee,*.scss,*.haml} :%s/\s\+$//e
 
 " Open help to the right or in new tab
 cnoremap <expr> hr getcmdtype() == ':' && empty(getcmdline()) ? 'bo vert h ' : 'hr'
@@ -313,7 +323,7 @@ autocmd BufReadPost *
 " start gVim maximized? [not working]
 "au GUIEnter * simalt ~x
 
-let g:NERDTreeQuitOnOpen = 1
+"let g:NERDTreeQuitOnOpen = 1
 
 cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
@@ -369,17 +379,16 @@ Bundle 'terryma/vim-expand-region'
 set wildignore+=*/tmp/*,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif
 
 " it's not wirking when g:ctrlp_user_command is set
+" not working with public :-(
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$\|public',
   \ 'file': '\v\.(png|jpg|jpeg|gif)$',
   \ }
-
 " overwirte variable from ~/.vim/plugins.vim
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -co |& egrep -v "\.(png|jpg|jpeg|gif)$"']
-
-
 let g:ctrlp_mruf_exclude = '/tmp/.*'
 let g:ctrlp_max_files = 20000
+let g:ctrlp_max_files=0
 let g:ctrlp_max_depth = 40
 
 Bundle 'tacahiroy/ctrlp-funky'
@@ -514,6 +523,7 @@ highlight NonText guifg=bg
 "vnoremap d "_d
 
 "set wrap
+set synmaxcol=120
 
 "Bundle 'onemanstartup/vim-flog'
 "silent exe 'g:flog_enable'
@@ -524,7 +534,6 @@ highlight NonText guifg=bg
 set cursorline
 
 " Great! - to toggle some definitions
-Bundle 'AndrewRadev/switch.vim'
 nnoremap - :Switch<cr>
 
 set relativenumber
@@ -540,15 +549,24 @@ set number
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 "}}}
 "
-
+set autoread
 autocmd BufNewFile,BufRead,BufReadPost *.eco set syntax=html
 autocmd BufNewFile,BufRead,BufReadPost *.eco set fdm=indent
 autocmd BufNewFile,BufRead,BufReadPost *.eco set syntax=html
 
+autocmd BufNewFile,BufRead,BufReadPost *.html set syntax=html
+autocmd BufNewFile,BufRead,BufReadPost *.html set fdm=indent
+autocmd BufNewFile,BufRead,BufReadPost *.html set syntax=html
+
+"http://stackoverflow.com/a/927634/1171144
+autocmd CursorHold * checktime
 
 autocmd BufNewFile,BufRead,BufReadPost *.slim set syntax=html
 autocmd BufNewFile,BufRead,BufReadPost *.slim set fdm=indent
 autocmd BufNewFile,BufRead,BufReadPost *.slim set syntax=slim
+
+
+autocmd BufNewFile,BufRead,BufReadPost *.cap set syntax=ruby
 
 " This plugin adds ic, ac, iC, and aC as text-objects. Use them in commands like vic, cic, and daC.
 Bundle  'coderifous/textobj-word-column.vim'
@@ -564,3 +582,28 @@ nmap cx <Plug>(Exchange)
 vmap X <Plug>(Exchange)
 nmap cxc <Plug>(ExchangeClear)
 nmap cxx <Plug>(ExchangeLine)
+
+Bundle 'onemanstartup/vim-slim.git'
+
+syntax enable
+filetype plugin indent on
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+Bundle 'vim-scripts/loremipsum'
+" http://stackoverflow.com/a/15867373/1171144
+nnoremap K :help <C-r><C-w><CR>
+highlight Cursor guibg=red
+
+
+"test
+nnoremap <leader>t :w\|:!rspec --color %<cr>
+Bundle 'tpope/vim-rvm'
+:autocmd BufEnter * Rvm
+
+" http://www.reddit.com/r/vim/comments/2xl1nz/getting_cut_copy_paste_to_feel_native/
+"vnoremap <C-c> "*y
+"vnoremap <D-c> "*y
+"vnoremap <C-x> "*d
+"vnoremap <D-x> "*d
+"inoremap <C-v> <Esc>:set paste<CR>i<C-r>*<Esc>:set nopaste<CR>a
+"inoremap <D-v> <Esc>:set paste<CR>i<C-r>*<Esc>:set nopaste<CR>a
